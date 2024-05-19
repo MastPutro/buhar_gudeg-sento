@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:buhar_gudeg/services/Auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class Login extends StatefulWidget {
   Login({super.key});
@@ -17,7 +20,7 @@ class _LoginState extends State<Login> {
   TextEditingController _email = TextEditingController();
 
   TextEditingController _password = TextEditingController();
-  final Uri _url = Uri.parse('https://flutter.dev');
+  final Uri _url = Uri.parse('https://depotbuhar.com/');
   Future<void> _launchUrl() async {
     if (!await launchUrl(_url, mode: LaunchMode.externalApplication)) {
       throw Exception('Could not launch $_url');
@@ -44,8 +47,13 @@ class _LoginState extends State<Login> {
           child: Padding(
             padding: const EdgeInsets.only(left: 20, bottom: 15),
             child: GestureDetector(
-              onTap: () async {
-                _launchUrl();
+              onTap: () {
+                setState(() {
+                  launchUrl(
+                    Uri.parse('https://depotbuhar.com/'),
+                    mode: LaunchMode.externalApplication,
+                  );
+                });
               },
               child: Text('depotbuhar.com', style: GoogleFonts.inter(
                 fontSize: 17,
@@ -136,6 +144,7 @@ class _LoginState extends State<Login> {
                                 }
                                 return null;
                               },
+                              obscureText: true,
                               style: GoogleFonts.inter(
                                   textStyle: TextStyle(
                                       fontSize: 16

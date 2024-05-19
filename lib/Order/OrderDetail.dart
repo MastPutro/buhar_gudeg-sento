@@ -79,7 +79,7 @@ class _OrderDetailState extends State<OrderDetail> {
     List<Map<String, dynamic>> fetchedItems = [];
 
     for (var item in itemList) {
-      var response = await http.get(Uri.parse('http://depotbuhar.com/api/menu/${item['item_id']}'));
+      var response = await http.get(Uri.parse('https://depotbuhar.com/menu/${item['item_id']}'));
       if (response.statusCode == 200) {
         var data = json.decode(response.body);
         fetchedItems.add({

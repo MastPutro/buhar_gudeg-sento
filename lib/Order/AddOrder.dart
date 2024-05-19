@@ -53,7 +53,7 @@ class _MyAppState extends State<AddOrder> {
   List<TextEditingController> counterControllers = [];
 
   Future<void> fetchItems() async {
-    final response = await http.get(Uri.parse('http://192.168.1.3:8000/api/menu'));
+    final response = await http.get(Uri.parse('https://depotbuhar.com/api/menu'));
     if (response.statusCode == 200) {
       setState(() {
         Iterable list = json.decode(response.body);
@@ -66,7 +66,7 @@ class _MyAppState extends State<AddOrder> {
 
   Future<void> _addOrder(int id_makanan, String meja, int quantity) async {
     final response = await http.post(
-      Uri.parse('http://192.168.1.3:8000/api/order/store'),
+      Uri.parse('https://depotbuhar.com/api/order/store'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },

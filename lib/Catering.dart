@@ -16,7 +16,7 @@ class _CateringState extends State<Catering> {
   List<Map<String, dynamic>> cateringData = [];
 
   Future<void> fetchCatering() async {
-    var request = http.Request('GET', Uri.parse('http://192.168.1.3:8000/api/ordercat'));
+    var request = http.Request('GET', Uri.parse('https://depotbuhar.com/api/ordercat'));
     http.StreamedResponse response = await request.send();
     if (response.statusCode == 200) {
       String responseBody = await response.stream.bytesToString();

@@ -49,7 +49,7 @@ class _CateringhistoryState extends State<Cateringhistory> {
   }
 
   Future<void> fetchCatering() async {
-    final response = await http.get(Uri.parse('http://192.168.1.3:8000/api/histori'));
+    final response = await http.get(Uri.parse('https://depotbuhar.com/api/histori'));
     if (response.statusCode == 200) {
       final List<dynamic> jsonData = json.decode(response.body);
       setState(() {

@@ -38,7 +38,7 @@ class _EatHereState extends State<EatHere> {
   }
 
   Future<void> _fetchOrderHistory() async {
-    final response = await http.get(Uri.parse('http://192.168.1.3:8000/api/history'));
+    final response = await http.get(Uri.parse('https://depotbuhar.com/api/history'));
     if (response.statusCode == 200) {
       final List<dynamic> jsonData = json.decode(response.body);
       setState(() {

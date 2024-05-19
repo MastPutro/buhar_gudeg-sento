@@ -5,6 +5,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 
+import 'main.dart';
+
 class Setting extends StatefulWidget {
   const Setting({super.key});
 
@@ -120,6 +122,8 @@ class _SettingState extends State<Setting> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextButton(onPressed: (){
+                print("logout");
+                runApp(Main());
                 Provider.of<Auth>(context, listen: false).logout();
               }, child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,

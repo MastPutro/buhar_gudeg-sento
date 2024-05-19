@@ -69,7 +69,7 @@ class _MejaDetailState extends State<MejaDetail> {
 
     var request = http.Request(
       'POST',
-      Uri.parse('http://192.168.1.3:8000/api/history/store?no_meja=${widget.no_meja}&total_harga=${totalAmount.toInt()}&list_order=$listOrder'),
+      Uri.parse('https://depotbuhar.com/api/history/store?no_meja=${widget.no_meja}&total_harga=${totalAmount.toInt()}&list_order=$listOrder'),
     );
     request.headers['Content-Type'] = 'application/json';
 
@@ -87,7 +87,7 @@ class _MejaDetailState extends State<MejaDetail> {
     var headers = {
       'Content-Type': 'application/x-www-form-urlencoded'
     };
-    var request = http.Request('DELETE', Uri.parse('http://192.168.1.3:8000/api/order/delete-by-meja'));
+    var request = http.Request('DELETE', Uri.parse('https://depotbuhar.com/api/order/delete-by-meja'));
     request.bodyFields = {
       'meja': widget.no_meja
     };
@@ -102,7 +102,7 @@ class _MejaDetailState extends State<MejaDetail> {
   }
 
   Future<void> fetchItem() async {
-    final response = await http.get(Uri.parse('http://192.168.1.3:8000/api/orders/peh?meja=${widget.no_meja}'));
+    final response = await http.get(Uri.parse('https://depotbuhar.com/api/orders/peh?meja=${widget.no_meja}'));
     if (response.statusCode == 200) {
       print(response.body);
       setState(() {
@@ -118,7 +118,7 @@ class _MejaDetailState extends State<MejaDetail> {
   Future<void> fetchMakananDetails() async {
     double newTotalAmount = 0.0;
     for (var order in itemOrder) {
-      final response = await http.get(Uri.parse('http://192.168.1.3:8000/api/menu/${order.id_makanan}'));
+      final response = await http.get(Uri.parse('https://depotbuhar.com/api/menu/${order.id_makanan}'));
       if (response.statusCode == 200) {
         final makananData = json.decode(response.body);
         setState(() {
@@ -144,6 +144,7 @@ class _MejaDetailState extends State<MejaDetail> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.blueAccent,
@@ -161,9 +162,14 @@ class _MejaDetailState extends State<MejaDetail> {
               runApp(MyApp());
             },
           ),
-          title: Text('Meja ${widget.no_meja}', style: GoogleFonts.inter(
-            color: Colors.white
-          )),
+          title: GestureDetector(
+            onTap: (){
+              fetchItem();
+            },
+            child: Text('Meja ${widget.no_meja}', style: GoogleFonts.inter(
+              color: Colors.white
+            )),
+          ),
         ),
         body: Padding(
           padding: EdgeInsets.all(16),
@@ -186,7 +192,7 @@ class _MejaDetailState extends State<MejaDetail> {
                     ),
                     trailing: Text('Jumlah: ${itemOrder[index].quantity}'),
                     leading: IconButton(onPressed: () async {
-                      var request = http.Request('DELETE', Uri.parse('http://192.168.1.3:8000/api/order/sentolop/${itemOrder[index].id}'));
+                      var request = http.Request('DELETE', Uri.parse('https://depotbuhar.com/api/order/sentolop/${itemOrder[index].id}'));
                       http.StreamedResponse response = await request.send();
                       if (response.statusCode == 200) {
                         print(await response.stream.bytesToString());

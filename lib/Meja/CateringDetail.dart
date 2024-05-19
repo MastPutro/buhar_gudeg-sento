@@ -23,7 +23,7 @@ class _CateringdetailState extends State<Cateringdetail> {
   final BlueThermalPrinter bluetooth = BlueThermalPrinter.instance;
 
   Future<void> _sendHistory()async {
-    var request = http.Request('POST', Uri.parse('http://192.168.1.3:8000/api/histori/store?name=${widget.name}&phone=${widget.phone}&foodname=${widget.foodname}&quantity=${widget.quantity}&total_price=${widget.price}'));
+    var request = http.Request('POST', Uri.parse('https://depotbuhar.com/api/histori/store?name=${widget.name}&phone=${widget.phone}&foodname=${widget.foodname}&quantity=${widget.quantity}&total_price=${widget.price}'));
     http.StreamedResponse response = await request.send();
     if (response.statusCode == 200) {
       print(await response.stream.bytesToString());
@@ -36,7 +36,7 @@ class _CateringdetailState extends State<Cateringdetail> {
   }
 
   Future<void>_deleteCatering()async {
-    var request = http.Request('DELETE', Uri.parse('http://192.168.1.3:8000/api/ordercat/delet/${widget.id}'));
+    var request = http.Request('DELETE', Uri.parse('https://depotbuhar.com/api/ordercat/delet/${widget.id}'));
     http.StreamedResponse response = await request.send();
     if (response.statusCode == 200) {
       print(await response.stream.bytesToString());
@@ -66,6 +66,7 @@ class _CateringdetailState extends State<Cateringdetail> {
   @override
   Widget build(BuildContext context) {
     return  MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(

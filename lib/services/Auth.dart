@@ -8,6 +8,7 @@ class Auth extends ChangeNotifier {
   bool get authenticated => _isLoggedIn;
   late String token;
 
+
   Future<void> login({required Map creds}) async {
     print(creds);
 
@@ -43,7 +44,7 @@ class Auth extends ChangeNotifier {
     var headers = {
       'Authorization': 'Bearer ${token}'
     };
-    var request = http.Request('GET', Uri.parse('http://192.168.1.3:8000/api/user/revoke'));
+    var request = http.Request('GET', Uri.parse('https://depotbuhar.com/api/user/revoke'));
     request.headers.addAll(headers);
     http.StreamedResponse response = await request.send();
 

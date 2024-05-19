@@ -33,7 +33,7 @@ class _MejaState extends State<Meja> {
   List<ItemMeja> mejas = [];
 
   Future<void> fetchMeja()async {
-    final response = await http.get(Uri.parse('http://192.168.1.3:8000/api/meja'));
+    final response = await http.get(Uri.parse('https://depotbuhar.com/api/meja'));
     if (response.statusCode == 200){
       setState(() {
         Iterable list = json.decode(response.body);
